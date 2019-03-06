@@ -32,7 +32,8 @@ module.exports = function(app, cb) {
   // dev-middleware
   const devMiddleware = require('koa-webpack-dev-middleware')(compiler, {
     publicPath: webpackDevConf.output.publicPath,
-    noInfo: true
+    noInfo: true,
+    index: '/'
   });
 
   // hot-middleware
