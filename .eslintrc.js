@@ -10,6 +10,7 @@ module.exports = {
   rules: {
     semi: ['error', 'always'],
     'space-before-function-paren': 0,
-    'no-constant-condition': 0
+    'no-constant-condition': 0,
+    'prefer-promise-reject-errors': 0
   }
 }

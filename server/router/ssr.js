@@ -33,15 +33,23 @@ module.exports = async (app) => {
   }
 
   async function render(ctx) {
-    ctx.headers['Content-type'] = 'text/html';
+    try {
+      ctx.headers['Content-type'] = 'text/html';
 
-    const context = {
-      url: ctx.path,
-      title: 'ssr'
-    };
+      const context = {
+        url: ctx.path,
+        title: 'ssr'
+      };
 
-    const html = await renderer.renderToString(context);
-    ctx.body = html;
+      const html = await renderer.renderToString(context);
+      ctx.body = html;
+    } catch (err) {
+      if (err.code === 404) {
+        ctx.redirect('/');
+      } else {
+        console.error('render error', err);
+      }
+    }
   }
 
   router.get('*', isProd ? render : async(ctx) => {

@@ -3,6 +3,7 @@ const path = require('path');
 const koaStatic = require('koa-static');
 
 const config = require('../config');
+const router = require('./router');
 const handleSSR = require('./router/ssr');
 
 const app = new Koa();
@@ -19,6 +20,11 @@ app.use(async (ctx, next) => {
 app.use(koaStatic(path.join(__dirname, '..', 'dist'), {
   maxage: 365 * 24 * 60 * 60 * 1000
 }));
+
+// api
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
 
 // ssr
 handleSSR(app);
