@@ -2,9 +2,13 @@ const Koa = require('koa');
 const path = require('path');
 const koaStatic = require('koa-static');
 
+const mongoose = require('./config/mongoose');
 const config = require('../config');
 const router = require('./router');
 const handleSSR = require('./router/ssr');
+
+// mongoose
+mongoose(config);
 
 const app = new Koa();
 
