@@ -1,6 +1,5 @@
 import Vue from 'vue';
 
-import '@/utils/flexible';
 import App from '@/app';
 import createRouter from '@/router';
 import createStore from '@/store';

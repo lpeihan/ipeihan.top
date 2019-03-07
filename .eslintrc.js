@@ -9,6 +9,7 @@ module.exports = {
   extends: ['standard', 'plugin:vue/essential'],
   rules: {
     semi: ['error', 'always'],
-    'space-before-function-paren': 0
+    'space-before-function-paren': 0,
+    'no-constant-condition': 0
   }
 }
