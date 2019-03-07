@@ -21,8 +21,9 @@
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
-    "vue": "^2.6.8",
+    "vue": "^2.5.17",
     "vue-router": "^3.0.2",
+    "vue-server-renderer": "^2.5.17",
     "vuex": "^3.1.0"
   },
   "devDependencies": {
@@ -70,9 +71,8 @@
     "uglifyjs-webpack-plugin": "^2.1.1",
     "url-loader": "^1.1.2",
     "vue-loader": "^15.4.2",
-    "vue-server-renderer": "^2.6.8",
     "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "^2.6.8",
+    "vue-template-compiler": "^2.5.17",
     "webpack": "^4.28.3",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.0",
