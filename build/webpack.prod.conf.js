@@ -6,7 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
-const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const VueClientPlugin = require('vue-server-renderer/client-plugin');
 
 const webpackBaseConf = require('./webpack.base.conf');
@@ -29,7 +28,7 @@ const webpackProdConf = merge(webpackBaseConf, {
 
     new HtmlWebpackPlugin({
       title: packageJson.name,
-      filename: 'index.html',
+      filename: 'client.html',
       template: resolve('public/index.html'),
       favicon: resolve('public/favicon.ico'),
       inject: true,
@@ -57,8 +56,7 @@ const webpackProdConf = merge(webpackBaseConf, {
         map: false
       },
       canPrint: true
-    }),
-    new InlineManifestWebpackPlugin('runtime')
+    })
   ],
 
   optimization: {
@@ -76,7 +74,7 @@ const webpackProdConf = merge(webpackBaseConf, {
         exclude: /\.min\.js$/, // 过滤掉以".min.js"结尾的文件，我们认为这个后缀本身就是已经压缩好的代码
         parallel: true, // 开启并行压缩
         extractComments: false, // 不生成 license
-        sourceMap: false, // set to true if you want JS source maps
+        sourceMap: true, // set to true if you want JS source maps
         uglifyOptions: {
           compress: {
             unused: true,

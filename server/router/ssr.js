@@ -1,9 +1,9 @@
 const Router = require('koa-router');
 const fs = require('fs');
 const path = require('path');
-const { isProd } = require('../utils');
-
 const { createBundleRenderer } = require('vue-server-renderer');
+
+const { isProd } = require('../utils');
 
 module.exports = async (app) => {
   const router = new Router();
