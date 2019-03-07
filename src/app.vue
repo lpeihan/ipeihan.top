@@ -25,17 +25,17 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-// #app
-  // .child-view
-  //   absolute: top left right
-  //   transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1)
+#app
+  .child-view
+    absolute: top left right
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1)
 
-  //   &.slider
-  //     &-left-enter
-  //     &-right-leave-to
-  //       transform: translate3d(100%, 0, 0)
+    &.slider
+      &-left-enter
+      &-right-leave-to
+        transform: translate3d(100%, 0, 0)
 
-  //     &-left-leave-to
-  //     &-right-enter
-  //       transform: translate3d(-100%, 0, 0)
+      &-left-leave-to
+      &-right-enter
+        transform: translate3d(-100%, 0, 0)
 </style>
