@@ -4,8 +4,9 @@ const Articles = require('../models/articles');
 
 module.exports = {
   async getArticles(ctx) {
+    console.log('hhhh');
     const article = new Articles({
-      author: 'lpeihan',
+      author: 'lpeihans',
       title: 'demo',
       content: 'a demo'
     });
@@ -13,7 +14,7 @@ module.exports = {
     ctx.body = await article.save();
   },
 
-  async createArticle(ctx) {
+  async saveArticle(ctx) {
     ctx.body = 'createArticle';
   }
 };

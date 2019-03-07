@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
  * UserSchema
  */
 const ArticlesSchema = new Schema({
-  author: { type: String, required: true, unique: true },
+  author: { type: String, required: true },
   title: { type: String },
   content: { type: String },
   create_date: { type: Number, default: Date.now() },

@@ -25,7 +25,7 @@ export default context => {
         context.state = store.state;
         context.router = router;
         resolve(app);
-      });
-    });
+      }).catch(reject);
+    }, reject);
   });
 };

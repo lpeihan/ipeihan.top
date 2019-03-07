@@ -4,6 +4,6 @@ const router = require('koa-router')();
 const articles = require('../controllers/articles');
 
 router.get('/', articles.getArticles);
-router.post('/', articles.createArticle);
+router.post('/', articles.saveArticle);
 
 module.exports = router;
