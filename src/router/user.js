@@ -2,7 +2,7 @@ export default [
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: 'login' */ '@/views/user/login'),
+    component: require('@/views/user/login').default,
     meta: {
       auth: true
     }
