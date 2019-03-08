@@ -5,9 +5,11 @@ import createRouter from '@/router';
 import createStore from '@/store';
 import Icon from '@/components/icon';
 import '@/assets/styles/index.styl';
+import ElementUI from './element-ui';
 
 Vue.config.productionTip = false;
 Vue.use(Icon);
+Vue.use(ElementUI);
 
 export default () => {
   const router = createRouter();

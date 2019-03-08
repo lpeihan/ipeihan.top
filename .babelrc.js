@@ -11,6 +11,13 @@ module.exports = {
       }
     ],
     require('@babel/plugin-syntax-dynamic-import'),
-    'transform-vue-jsx'
+    'transform-vue-jsx',
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
   ]
 };
