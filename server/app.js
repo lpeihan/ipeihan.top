@@ -1,7 +1,7 @@
 const Koa = require('koa');
 const path = require('path');
 const koaStatic = require('koa-static');
-const session = require('koa-session');
+const bodyParser = require('koa-bodyparser');
 
 const mongoose = require('./config/mongoose');
 const config = require('../config');
@@ -13,9 +13,7 @@ mongoose(config);
 
 const app = new Koa();
 
-app.keys = ['secret'];
-
-app.use(session({}, app));
+app.use(bodyParser());
 
 // logger
 app.use(async (ctx, next) => {

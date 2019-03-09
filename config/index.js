@@ -15,5 +15,7 @@ module.exports = {
     dist: 'dist'
   },
 
+  jwtSecret: 'c29tZXNlY3JldGtleWZvcmpzb253ZWJ0b2tlbg',
+
   app
 };

@@ -1,5 +1,6 @@
 const state = {
-  articles: []
+  articles: [],
+  user: {}
 };
 
 export default state;

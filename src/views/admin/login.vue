@@ -1,47 +1,36 @@
 <template>
   <div class="login">
-    <el-form class="login-form">
-      <div class="login-title">Login</div>
-
-      <el-form-item prop="username">
-        <el-input></el-input>
-      </el-form-item>
-
-      <el-form-item prop="password">
-        <el-input></el-input>
-      </el-form-item>
-
-      <el-button type="primary" size="medium" class="login-btn">login</el-button>
-
-      <div class="login-tips">
-        <p>username: admin</p>
-        <p>password: password</p>
-      </div>
-    </el-form>
+    <input type="text" placeholder="请输入用户名" v-model="model.username">
+    <input type="password" placeholder="请输入密码" v-model="model.password">
+    <button @click="register">注册</button>
+    <button @click="login">登录</button>
   </div>
 </template>
 
+<script>
+import { mapActions } from 'vuex';
+
+export default {
+  data() {
+    return {
+      model: {
+        username: '',
+        password: ''
+      }
+    };
+  },
+  methods: {
+    ...mapActions(['loginAction', 'registerAction']),
+    login() {
+      this.loginAction(this.model);
+    },
+    register() {
+      this.registerAction(this.model);
+    }
+  }
+};
+</script>
+
 <style lang="stylus" scoped>
-.login
-  min-height: 100%
-  color: #eee
-  background: #2d3a4b
 
-  .login-form
-    position: relative
-    width: 520px
-    max-width: 100%
-    padding: 160px 35px 0
-    margin: 0 auto
-    overflow: hidden
-
-    .login-title
-      text-align: center
-      font-size: 26px
-      margin-bottom: 40px
-      font-weight: bold
-
-    .login-btn
-      width: 100%
-      margin-bottom: 30px
 </style>

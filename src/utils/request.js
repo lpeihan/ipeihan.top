@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const CODE_OK = 200;
+const CODE_OK = 0;
 
 const request = axios.create({
   baseURL: process.env.VUE_ENV === 'server' ? 'http://127.0.0.1:8201/api/' : '/api',

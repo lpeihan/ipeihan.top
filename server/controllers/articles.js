@@ -1,13 +1,14 @@
 'use strict';
 
 const Articles = require('../models/articles');
+const { CODE_OK } = require('../config/code');
 
 module.exports = {
   async getArticles(ctx) {
     const articles = await Articles.find();
 
     ctx.body = {
-      code: 200,
+      code: CODE_OK,
       data: articles
     };
   },
