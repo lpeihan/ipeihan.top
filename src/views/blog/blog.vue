@@ -16,10 +16,15 @@ export default {
     ...mapGetters(['articles'])
   },
   methods: {
-    ...mapActions(['fetchArticles'])
+    ...mapActions(['getArticles'])
   },
   asyncData ({ store }) {
-    return store.dispatch('fetchArticles');
+    return store.dispatch('getArticles');
+  },
+  async mounted() {
+    if (this.articles.length <= 0) {
+      await this.getArticles();
+    }
   }
 };
 </script>

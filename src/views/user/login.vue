@@ -1,18 +1,13 @@
 <template>
   <div class="login">
     <icon name="back" @click="back()"></icon>
-    {{name}}
+    user
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
   name: 'login',
-  computed: {
-    ...mapGetters('user', ['name'])
-  },
   methods: {
     back() {
       this.$router.go(-1);

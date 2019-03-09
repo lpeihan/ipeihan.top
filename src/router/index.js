@@ -19,8 +19,8 @@ export default function() {
     routes: [
       {
         path: '/',
-        name: 'home',
-        component: require('@/views/home/home').default
+        name: 'blog',
+        component: require('@/views/blog/blog').default
       }
     ].concat(routes)
   });
