@@ -3,7 +3,7 @@ import axios from 'axios';
 const CODE_OK = 200;
 
 const request = axios.create({
-  baseURL: 'http://127.0.0.1:8201/api/',
+  baseURL: process.env.VUE_ENV === 'server' ? 'http://127.0.0.1:8201/api/' : '/api',
   timeout: 5000,
   params: {},
   _loading: false, // 是否显示 loading
