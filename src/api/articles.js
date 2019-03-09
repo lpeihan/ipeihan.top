@@ -1,8 +1,8 @@
 import request from '@/utils/request';
 
-export function getArticles(start = 0, limit = 10) {
+export function fetchArticles(start = 0, limit = 10) {
   return request({
-    url: 'http://127.0.0.1:8201/api/articles',
+    url: '/articles',
     params: {
       start,
       limit

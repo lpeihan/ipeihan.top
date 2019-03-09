@@ -10,15 +10,16 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+
 export default {
   computed: {
     ...mapGetters(['articles'])
   },
   methods: {
-    ...mapActions(['getArticles'])
+    ...mapActions(['fetchArticles'])
   },
   asyncData ({ store }) {
-    return store.dispatch('getArticles');
+    return store.dispatch('fetchArticles');
   }
 };
 </script>

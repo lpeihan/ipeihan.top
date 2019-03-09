@@ -3,6 +3,7 @@ import axios from 'axios';
 const CODE_OK = 200;
 
 const request = axios.create({
+  baseURL: 'http://127.0.0.1:8201/api/',
   timeout: 5000,
   params: {},
   _loading: false, // 是否显示 loading
@@ -34,8 +35,6 @@ request.interceptors.response.use(
     return Promise.reject(res.data);
   },
   err => {
-    console.log('~~~~~~~~~2config', err);
-
     if (err.config._loading) {}
 
     if (err.config._toast) {}
