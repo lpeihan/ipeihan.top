@@ -4,7 +4,15 @@ const Articles = require('../models/articles');
 
 module.exports = {
   async getArticles(ctx) {
-    console.log('hhhh');
+    const articles = await Articles.find();
+
+    ctx.body = {
+      code: 200,
+      data: articles
+    };
+  },
+
+  async saveArticle(ctx) {
     const article = new Articles({
       author: 'lpeihans',
       title: 'demo',
@@ -12,9 +20,5 @@ module.exports = {
     });
 
     ctx.body = await article.save();
-  },
-
-  async saveArticle(ctx) {
-    ctx.body = 'createArticle';
   }
 };

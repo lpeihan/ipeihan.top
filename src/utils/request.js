@@ -34,6 +34,8 @@ request.interceptors.response.use(
     return Promise.reject(res.data);
   },
   err => {
+    console.log('~~~~~~~~~2config', err);
+
     if (err.config._loading) {}
 
     if (err.config._toast) {}
