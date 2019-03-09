@@ -1,4 +1,5 @@
 import jwtDecode from 'jwt-decode';
+import { Message } from 'element-ui';
 
 import { getArticles } from '@/api/articles';
 
@@ -29,7 +30,10 @@ const actions = {
     const res = await register(user);
     const token = res.data;
 
+    localStorage.setItem('token', token);
     commit(SET_USER, jwtDecode(token));
+
+    Message({ message: '恭喜你注册成功', type: 'success' });
   }
 };
 

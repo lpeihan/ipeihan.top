@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Message } from 'element-ui';
 
 const CODE_OK = 0;
 
@@ -30,14 +31,14 @@ request.interceptors.response.use(
       return res.data;
     }
 
-    if (res.config._toast) {}
+    res.config._toast && Message.error(res.data.msg);
 
     return Promise.reject(res.data);
   },
   err => {
     if (err.config._loading) {}
 
-    if (err.config._toast) {}
+    err.config._toast && Message.error(err.data.msg);
 
     // 请求超时处理
     if (err.code === 'ECONNABORTED' && err.message.indexOf('timeout') > -1) {
