@@ -1,7 +1,7 @@
 'use strict';
 
 const Articles = require('../models/articles');
-const { CODE_OK } = require('../config/code');
+const { CODE_OK } = require('../code');
 
 module.exports = {
   async getArticles(ctx) {

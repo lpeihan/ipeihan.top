@@ -1,4 +1,3 @@
-import jwtDecode from 'jwt-decode';
 import { Message } from 'element-ui';
 
 import { getArticles } from '@/api/articles';
@@ -20,18 +19,14 @@ const actions = {
   },
   async loginAction({ commit }, user) {
     const res = await login(user);
-    const currentUser = jwtDecode(res.data);
 
-    commit(SET_USER, currentUser);
-
-    console.log(currentUser);
+    commit(SET_USER, res.data);
+    Message({ message: '登录成功', type: 'success' });
   },
   async registerAction({ commit }, user) {
     const res = await register(user);
-    const token = res.data;
 
-    localStorage.setItem('token', token);
-    commit(SET_USER, jwtDecode(token));
+    commit(SET_USER, res.data);
 
     Message({ message: '恭喜你注册成功', type: 'success' });
   }

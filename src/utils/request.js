@@ -17,14 +17,6 @@ request.interceptors.request.use(
   config => {
     if (config._loading) {}
 
-    if (isServer === false) {
-      let token = localStorage.getItem('token');
-
-      if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
-      }
-    }
-
     return config;
   },
   err => {

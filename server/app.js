@@ -7,7 +7,8 @@ const mongoose = require('./config/mongoose');
 const config = require('../config');
 const router = require('./router');
 const handleSSR = require('./router/ssr');
-const auth = require('./services/auth');
+// const auth = require('./services/auth');
+const session = require('./config/session');
 
 // mongoose
 mongoose(config);
@@ -15,6 +16,9 @@ mongoose(config);
 const app = new Koa();
 
 app.use(bodyParser());
+
+app.keys = config.cookie.keys;
+app.use(session(app));
 
 // logger
 app.use(async (ctx, next) => {
@@ -30,7 +34,7 @@ app.use(koaStatic(path.join(__dirname, '..', 'dist'), {
   maxage: 365 * 24 * 60 * 60 * 1000
 }));
 
-app.use(auth);
+// app.use(auth);
 
 // api
 app

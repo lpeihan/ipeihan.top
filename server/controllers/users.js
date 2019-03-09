@@ -1,9 +1,7 @@
 'use strict';
 
 const Users = require('../models/users');
-const jwt = require('jsonwebtoken');
-const config = require('../../config');
-const { CODE_USER_REGISTER, CODE_OK } = require('../config/code');
+const { CODE_USER_REGISTER, CODE_OK } = require('../code');
 
 module.exports = {
   async login(ctx) {
@@ -11,12 +9,11 @@ module.exports = {
     const user = await Users.findOne({ username });
 
     if (user && await user.authenticate(password)) {
-      const token = jwt.sign({
-        id: user.id,
-        username: user.username
-      }, config.jwtSecret);
-
-      ctx.body = { code: CODE_OK, data: token };
+      ctx.session.user = user;
+      ctx.body = {
+        code: CODE_OK,
+        data: user
+      };
     } else {
       ctx.status = 401;
       ctx.body = { msg: '用户名或密码错误' };
@@ -36,14 +33,9 @@ module.exports = {
 
       const user = new Users({ username, password });
 
-      await user.save();
+      ctx.session.user = await user.save();
 
-      const token = jwt.sign({
-        id: user.id,
-        username: user.username
-      }, config.jwtSecret);
-
-      ctx.body = { code: CODE_OK, data: token };
+      ctx.body = { code: CODE_OK, data: ctx.session.user };
     } catch (err) {
       console.log(err);
     }
