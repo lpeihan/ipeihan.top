@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <router-link to="/login">login1s2</router-link>
+    <router-link to="/admin/login">login</router-link>
 
     <div class="item" v-for="item in articles" :key="item._id">
       {{item.title}}

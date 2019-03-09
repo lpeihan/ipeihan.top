@@ -7,7 +7,20 @@ const { CODE_USER_REGISTER, CODE_OK } = require('../config/code');
 
 module.exports = {
   async login(ctx) {
+    const { username, password } = ctx.request.body;
+    const user = await Users.findOne({ username });
 
+    if (user && await user.authenticate(password)) {
+      const token = jwt.sign({
+        id: user.id,
+        username: user.username
+      }, config.jwtSecret);
+
+      ctx.body = { code: CODE_OK, data: token };
+    } else {
+      ctx.status = 401;
+      ctx.body = { msg: '用户名或密码错误' };
+    }
   },
   async register(ctx) {
     try {

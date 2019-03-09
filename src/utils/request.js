@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { Message } from 'element-ui';
 
+import { isServer } from '@/config';
+
 const CODE_OK = 0;
 
 const request = axios.create({
-  baseURL: process.env.VUE_ENV === 'server' ? 'http://127.0.0.1:8201/api/' : '/api',
+  baseURL: isServer ? 'http://127.0.0.1:8201/api/' : '/api',
   timeout: 5000,
   params: {},
   _loading: false, // 是否显示 loading
@@ -14,6 +16,14 @@ const request = axios.create({
 request.interceptors.request.use(
   config => {
     if (config._loading) {}
+
+    if (isServer === false) {
+      let token = localStorage.getItem('token');
+
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
+    }
 
     return config;
   },
@@ -38,7 +48,7 @@ request.interceptors.response.use(
   err => {
     if (err.config._loading) {}
 
-    err.config._toast && Message.error(err.data.msg);
+    err.config._toast && Message.error(err.response.data.msg);
 
     // 请求超时处理
     if (err.code === 'ECONNABORTED' && err.message.indexOf('timeout') > -1) {
