@@ -1,6 +1,7 @@
 const Koa = require('koa');
 const path = require('path');
 const koaStatic = require('koa-static');
+const session = require('koa-session');
 
 const mongoose = require('./config/mongoose');
 const config = require('../config');
@@ -12,9 +13,14 @@ mongoose(config);
 
 const app = new Koa();
 
+app.keys = ['secret'];
+
+app.use(session({}, app));
+
 // logger
 app.use(async (ctx, next) => {
   const start = new Date();
+
   await next();
   const ms = new Date() - start;
   console.log(`${ctx.method} ${ctx.url} - ${ms}`);

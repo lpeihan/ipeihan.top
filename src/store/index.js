@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import createLogger from 'vuex/dist/logger';
+// import createLogger from 'vuex/dist/logger';
 import state from './state';
 import getters from './getters';
 import mutations from './mutations';
@@ -14,8 +14,8 @@ export default function() {
     state,
     getters,
     mutations,
-    actions,
+    actions
 
-    plugins: process.env.NODE_ENV === 'development' ? [createLogger()] : []
+    // plugins: process.env.NODE_ENV === 'development' ? [createLogger()] : []
   });
 }
