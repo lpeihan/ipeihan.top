@@ -22,11 +22,13 @@ export default {
   },
   methods: {
     ...mapActions(['loginAction', 'registerAction']),
-    login() {
-      this.loginAction(this.model);
+    async login() {
+      await this.loginAction(this.model);
+      this.$router.push('/admin/articles');
     },
     register() {
       this.registerAction(this.model);
+      this.$router.push('/');
     },
     back() {
       this.$router.push('/');

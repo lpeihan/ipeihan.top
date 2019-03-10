@@ -14,8 +14,8 @@
           <template slot="title">
             <i class="el-icon-menu"></i>用户信息
           </template>
-          <el-menu-item index="1-1">修改资料</el-menu-item>
-          <el-menu-item index="1-2">网站信息</el-menu-item>
+          <el-menu-item index="2-1">修改资料</el-menu-item>
+          <el-menu-item index="2-2">网站信息</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-aside>
@@ -51,14 +51,14 @@ export default {
     ...mapGetters(['user'])
   },
   data() {
-    const item = {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    };
-    return {
-      tableData: Array(20).fill(item)
-    };
+    return {};
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (!vm.user.username) {
+        vm.$router.push('/admin/login');
+      }
+    });
   }
 };
 </script>
