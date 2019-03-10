@@ -23,7 +23,7 @@ export default {
   },
   async mounted() {
     if (this.articles.length <= 0) {
-      await this.getArticles();
+      await this.getArticles({});
     }
   }
 };

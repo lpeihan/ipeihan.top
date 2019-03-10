@@ -10,6 +10,7 @@ module.exports = {
 
     if (user && await user.authenticate(password)) {
       ctx.session.user = user.id;
+      ctx.currentUser = user;
       ctx.body = {
         code: CODE_OK,
         data: user
@@ -35,6 +36,7 @@ module.exports = {
 
       const data = await user.save();
       ctx.session.user = data.id;
+      ctx.currentUser = data;
 
       ctx.body = { code: CODE_OK, data };
     } catch (err) {

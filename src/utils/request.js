@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Message } from 'element-ui';
+import bus from '@/utils/bus';
 
 import { isServer } from '@/config';
 
@@ -47,6 +48,10 @@ request.interceptors.response.use(
     // 请求超时处理
     if (err.code === 'ECONNABORTED' && err.message.indexOf('timeout') > -1) {
       // todo
+    }
+
+    if (err.response.status === 401) {
+      bus.$emit('auth');
     }
 
     return Promise.reject(err);

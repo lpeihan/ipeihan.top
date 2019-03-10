@@ -8,6 +8,7 @@ const config = require('../config');
 const router = require('./router');
 const handleSSR = require('./router/ssr');
 const session = require('./config/session');
+const { setCurrentUser } = require('./services/auth');
 
 // mongoose
 mongoose(config);
@@ -27,6 +28,9 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start;
   console.log(`${ctx.method} ${ctx.url} - ${ms}`);
 });
+
+// 设置当前用户
+app.use(setCurrentUser);
 
 // static
 app.use(koaStatic(path.join(__dirname, '..', 'dist'), {

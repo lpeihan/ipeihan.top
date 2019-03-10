@@ -4,6 +4,7 @@
     <input type="password" placeholder="请输入密码" v-model="model.password">
     <button @click="register">注册</button>
     <button @click="login">登录</button>
+    <button @click="back"></button>
   </div>
 </template>
 
@@ -26,6 +27,9 @@ export default {
     },
     register() {
       this.registerAction(this.model);
+    },
+    back() {
+      this.$router.push('/');
     }
   }
 };

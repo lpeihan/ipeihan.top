@@ -12,7 +12,7 @@ export default [
     name: 'login',
     component: require('@/views/admin/login').default,
     meta: {
-      auth: true
+      auth: false
     }
   }
 ];

@@ -4,6 +4,10 @@ export default context => {
   return new Promise((resolve, reject) => {
     const { app, router, store } = createApp();
 
+    if (context.user) {
+      store.state.user = context.user;
+    }
+
     router.push(context.url);
 
     router.onReady(() => {
