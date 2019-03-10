@@ -18,8 +18,8 @@ export default {
   methods: {
     ...mapActions(['getArticles'])
   },
-  asyncData ({ store }) {
-    return store.dispatch('getArticles');
+  asyncData ({ store, cookies }) {
+    return store.dispatch('getArticles', { cookies });
   },
   async mounted() {
     if (this.articles.length <= 0) {

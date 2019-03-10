@@ -9,7 +9,7 @@ module.exports = {
     const user = await Users.findOne({ username });
 
     if (user && await user.authenticate(password)) {
-      ctx.session.user = user;
+      ctx.session.user = user.id;
       ctx.body = {
         code: CODE_OK,
         data: user
@@ -33,9 +33,10 @@ module.exports = {
 
       const user = new Users({ username, password });
 
-      ctx.session.user = await user.save();
+      const data = await user.save();
+      ctx.session.user = data.id;
 
-      ctx.body = { code: CODE_OK, data: ctx.session.user };
+      ctx.body = { code: CODE_OK, data };
     } catch (err) {
       console.log(err);
     }

@@ -12,6 +12,7 @@ module.exports = {
     'space-before-function-paren': 0,
     'no-constant-condition': 0,
     'prefer-promise-reject-errors': 0,
-    'no-return-await': 0
+    'no-return-await': 0,
+    'no-throw-literal': 0
   }
 }

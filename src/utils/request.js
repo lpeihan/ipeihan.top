@@ -15,7 +15,9 @@ const request = axios.create({
 
 request.interceptors.request.use(
   config => {
-    if (config._loading) {}
+    if (config._cookies) {
+      config.headers['cookie'] = config._cookies;
+    }
 
     return config;
   },

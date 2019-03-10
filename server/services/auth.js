@@ -1,36 +1,26 @@
 'use strict';
 
-const jwt = require('jsonwebtoken');
 const Users = require('../models/users');
-const config = require('../../config');
+const { CODE_AUTH } = require('../code');
 
 async function authenticate(ctx, next) {
-  const authorizationHeader = ctx.req.headers['authorization'];
+  const userId = ctx.session.user;
 
-  let token;
-  let user;
+  if (userId) {
+    const user = await Users.findById(userId);
 
-  token = authorizationHeader ? authorizationHeader.split(' ')[1] : '';
-
-  if (token) {
-    await jwt.verify(token, config.jwtSecret, async (err, decoded) => {
-      if (err) {
-        ctx.status = 401;
-        ctx.body = { msg: '您还没登录' };
-        return;
-      }
-      user = await Users.findById(decoded.id);
-      if (user) {
-        ctx.user = user;
-        await next();
-      } else {
-        ctx.status = 401;
-        ctx.body = { msg: '您还没登录' };
-      }
-    });
+    if (user) {
+      ctx.currentUser = user;
+      await next();
+    } else {
+      ctx.status = 401;
+      ctx.session.user = ctx.currentUser = null;
+      ctx.body = { msg: '您还没登录', code: CODE_AUTH };
+    }
   } else {
     ctx.status = 401;
-    ctx.body = { msg: '您还没登录' };
+    ctx.session.user = ctx.currentUser = null;
+    ctx.body = { msg: '您还没登录', code: CODE_AUTH };
   }
 }
 

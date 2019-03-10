@@ -1,6 +1,6 @@
-const state = {
+const state = () => ({
   articles: [],
   user: {}
-};
+});
 
 export default state;

@@ -13,8 +13,8 @@ import {
 } from './mutation-types';
 
 const actions = {
-  async getArticles({ commit }) {
-    const res = await getArticles();
+  async getArticles({ commit }, payload) {
+    const res = await getArticles(payload);
     commit(SET_ARTICLES, res.data);
   },
   async loginAction({ commit }, user) {

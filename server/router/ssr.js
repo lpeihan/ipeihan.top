@@ -38,16 +38,24 @@ module.exports = async (app) => {
 
       const context = {
         url: ctx.path,
-        title: 'ssr'
+        title: 'ssr',
+        cookies: ctx.request.headers['cookie']
       };
 
       const html = await renderer.renderToString(context);
+
+      if (context.router.currentRoute.fullPath !== ctx.path) {
+        return ctx.redirect(context.router.currentRoute.fullPath);
+      }
+
       ctx.body = html;
     } catch (err) {
       if (err.code === 404) {
         ctx.redirect('/');
+      } else if (err.message.indexOf(401) > -1) {
+        ctx.redirect('/admin/login');
       } else {
-        console.error('render error', err);
+        console.log('render error~~~~', err);
       }
     }
   }
