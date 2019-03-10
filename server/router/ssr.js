@@ -38,7 +38,7 @@ module.exports = async (app) => {
 
       const context = {
         url: ctx.path,
-        title: 'ssr',
+        title: 'koa-ssr',
         user: ctx.currentUser || {},
         cookies: ctx.request.headers['cookie']
       };
