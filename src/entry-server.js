@@ -23,7 +23,8 @@ export default context => {
             route: router.currentRoute,
             router,
             store,
-            cookies: context.cookies
+            cookies: context.cookies,
+            user: context.user
           });
         }
       })).then(data => {

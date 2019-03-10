@@ -53,12 +53,13 @@ export default {
   data() {
     return {};
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      if (!vm.user.username) {
-        vm.$router.push('/admin/login');
-      }
-    });
+  asyncData({ user, router }) {
+    !user.username && router.push('/admin/login');
+  },
+  created(to, from, next) {
+    if (!this.user.username) {
+      this.$router.push('/admin/login');
+    }
   }
 };
 </script>
