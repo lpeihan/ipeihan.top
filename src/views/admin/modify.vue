@@ -70,7 +70,6 @@ export default {
 <style lang="stylus" scoped>
 .modify
   width: 320px
-  margin: 50px auto 0
 
   .item
     margin-bottom: 20px
