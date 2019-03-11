@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 100vh; border: 1px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="['1', '1']" default-active="1-1">
+      <el-menu :default-openeds="['1', '1']" default-active="1-1" unique-opened>
         <el-submenu index="1">
           <template slot="title">
             <i class="el-icon-message"></i>文章管理
@@ -15,7 +15,7 @@
             <i class="el-icon-menu"></i>用户信息
           </template>
           <el-menu-item index="2-1" @click="go('/admin/modify')">修改资料</el-menu-item>
-          <el-menu-item index="2-2">网站信息</el-menu-item>
+          <el-menu-item index="2-2" @click="go('/admin/web-info')">网站信息</el-menu-item>
         </el-submenu>
       </el-menu>
     </el-aside>
@@ -38,7 +38,9 @@
       </el-header>
 
       <el-main>
-        <router-view></router-view>
+        <transition mode="out-in">
+          <router-view class="router-view"></router-view>
+        </transition>
       </el-main>
     </el-container>
   </el-container>
@@ -80,5 +82,14 @@ export default {
   color: #333
 
 .el-dropdown
-  color: white
+  color: white !important
+
+.router-view
+  &.v
+    &-enter-active
+    &-leave-active
+      transition: all .3s
+    &-enter
+    &-leave-to
+      opacity: 0
 </style>

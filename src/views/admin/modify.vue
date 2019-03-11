@@ -54,8 +54,14 @@ export default {
   },
   methods: {
     ...mapActions(['modifyAction']),
-    confirm() {
-      this.modifyAction();
+    async confirm() {
+      await this.modifyAction(this.model);
+      this.$message({
+        type: 'success',
+        message: '修改用户信息成功'
+      });
+
+      this.$router.push('/admin');
     }
   }
 };

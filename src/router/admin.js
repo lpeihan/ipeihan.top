@@ -41,6 +41,14 @@ export default [
         meta: {
           auth: true
         }
+      },
+      {
+        path: '/admin/web-info',
+        name: '网站信息',
+        component: require('@/views/admin/web-info').default,
+        meta: {
+          auth: true
+        }
       }
     ]
   },

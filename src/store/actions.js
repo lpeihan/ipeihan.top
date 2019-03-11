@@ -40,8 +40,8 @@ const actions = {
     commit(SET_USER, {});
   },
   async modifyAction({ commit }, payload) {
-    const res = await modify();
-    console.log(res);
+    const res = await modify(payload);
+    commit(SET_USER, res.data);
   }
 };
 

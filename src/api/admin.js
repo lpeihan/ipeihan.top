@@ -28,9 +28,10 @@ export function logout() {
   });
 }
 
-export function modify() {
+export function modify(data) {
   return request({
     method: 'put',
-    url: '/users/modify'
+    url: '/users/modify',
+    data
   });
 }

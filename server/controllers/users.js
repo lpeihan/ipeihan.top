@@ -1,7 +1,11 @@
 'use strict';
 
 const Users = require('../models/users');
-const { CODE_USER_REGISTER, CODE_OK } = require('../code');
+const {
+  CODE_USER_REGISTER,
+  CODE_OK,
+  CODE_PASSWORD_ERROR
+} = require('../code');
 
 module.exports = {
   async login(ctx) {
@@ -53,8 +57,24 @@ module.exports = {
   },
 
   async modify(ctx) {
+    const { password, oldPassword } = ctx.request.body;
+
     const user = await Users.findById(ctx.currentUser.id);
-    console.log(user);
-    ctx.body = '12';
+
+    if (user && await user.authenticate(oldPassword)) {
+      user.password = password;
+      const data = await user.save();
+
+      ctx.body = {
+        code: CODE_OK,
+        msg: '修改用户信息成功',
+        data
+      };
+    } else {
+      ctx.body = {
+        code: CODE_PASSWORD_ERROR,
+        msg: '密码错误'
+      };
+    }
   }
 };
