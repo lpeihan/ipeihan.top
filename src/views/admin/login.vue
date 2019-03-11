@@ -25,10 +25,10 @@ export default {
     ...mapActions(['loginAction', 'registerAction']),
     async login() {
       await this.loginAction(this.model);
-      this.$router.push('/admin/articles');
+      this.$router.push('/admin/articles-list');
     },
-    register() {
-      this.registerAction(this.model);
+    async register() {
+      await this.registerAction(this.model);
       this.$router.push('/');
     },
     back() {

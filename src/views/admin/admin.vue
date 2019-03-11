@@ -6,9 +6,9 @@
           <template slot="title">
             <i class="el-icon-message"></i>文章管理
           </template>
-          <el-menu-item index="1-1" @click="$router.push('/admin/articles')">发布文章</el-menu-item>
-          <el-menu-item index="1-2">管理文章</el-menu-item>
-          <el-menu-item index="1-3">添加分类</el-menu-item>
+          <el-menu-item index="1-1" @click="go('/admin/articles-list')">文章列表</el-menu-item>
+          <el-menu-item index="1-2" @click="go('/admin/articles-new')">发布文章</el-menu-item>
+          <el-menu-item index="1-3" @click="go('/admin/articles-type')">添加分类</el-menu-item>
         </el-submenu>
         <el-submenu index="2">
           <template slot="title">
@@ -21,8 +21,9 @@
     </el-aside>
 
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
+      <el-header>
+        <span>{{$route.name}}</span>
+        <el-dropdown style="float: right; cursor: pointer;" trigger="click">
             <span>
               你好，{{user.username}}
               <i class="el-icon-arrow-down el-icon--right"></i>
@@ -31,7 +32,7 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>修改资料</el-dropdown-item>
             <el-dropdown-item>github</el-dropdown-item>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -44,14 +45,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
+  data() {
+    return {};
+  },
   computed: {
     ...mapGetters(['user'])
   },
-  data() {
-    return {};
+  methods: {
+    ...mapActions(['logoutAction']),
+    go(path) {
+      this.$router.push(path);
+    },
+    async logout() {
+      await this.logoutAction();
+      this.$router.push('/admin/login');
+    }
   }
 };
 </script>

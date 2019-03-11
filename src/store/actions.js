@@ -4,7 +4,8 @@ import { getArticles } from '@/api/articles';
 
 import {
   login,
-  register
+  register,
+  logout
 } from '@/api/admin';
 
 import {
@@ -29,6 +30,13 @@ const actions = {
     commit(SET_USER, res.data);
 
     Message({ message: '恭喜你注册成功', type: 'success' });
+  },
+  async logoutAction({ commit }) {
+    const res = await logout();
+
+    Message({ message: res.msg, type: 'info' });
+
+    commit(SET_USER, {});
   }
 };
 

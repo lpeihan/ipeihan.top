@@ -42,5 +42,13 @@ module.exports = {
     } catch (err) {
       console.log(err);
     }
+  },
+
+  async logout(ctx) {
+    ctx.session.user = null;
+    ctx.currentUser = null;
+    ctx.body = {
+      code: CODE_OK, msg: '退出成功'
+    };
   }
 };

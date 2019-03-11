@@ -20,3 +20,10 @@ export function login({ username, password }) {
     }
   });
 }
+
+export function logout() {
+  return request({
+    method: 'delete',
+    url: '/users/logout'
+  });
+}
