@@ -52,14 +52,6 @@ export default {
   },
   data() {
     return {};
-  },
-  asyncData({ user, router }) {
-    !user.username && router.push('/admin/login');
-  },
-  created(to, from, next) {
-    if (!this.user.username) {
-      this.$router.push('/admin/login');
-    }
   }
 };
 </script>

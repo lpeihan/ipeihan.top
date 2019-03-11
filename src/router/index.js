@@ -25,9 +25,9 @@ export default function() {
     ].concat(routes)
   });
 
-  router.beforeEach((to, from, next) => {
-    next();
-  });
+  // router.beforeEach((to, from, next) => {
+  //   next();
+  // });
 
   return router;
 }

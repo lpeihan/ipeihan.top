@@ -8,6 +8,14 @@ export default context => {
       store.state.user = context.user;
     }
 
+    router.beforeEach((to, from, next) => {
+      if (to.meta.auth && store.getters.auth === false) {
+        next('/admin/login');
+      } else {
+        next();
+      }
+    });
+
     router.push(context.url);
 
     router.onReady(() => {

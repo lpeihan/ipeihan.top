@@ -4,7 +4,8 @@
     <input type="password" placeholder="请输入密码" v-model="model.password">
     <button @click="register">注册</button>
     <button @click="login">登录</button>
-    <button @click="back"></button>
+    <button @click="back">文章列表</button>
+    <button @click="$router.push('/admin')">管理员</button>
   </div>
 </template>
 
