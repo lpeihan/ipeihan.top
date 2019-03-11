@@ -5,7 +5,8 @@ import { getArticles } from '@/api/articles';
 import {
   login,
   register,
-  logout
+  logout,
+  modify
 } from '@/api/admin';
 
 import {
@@ -37,6 +38,10 @@ const actions = {
     Message({ message: res.msg, type: 'info' });
 
     commit(SET_USER, {});
+  },
+  async modifyAction({ commit }, payload) {
+    const res = await modify();
+    console.log(res);
   }
 };
 

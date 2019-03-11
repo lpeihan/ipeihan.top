@@ -50,5 +50,11 @@ module.exports = {
     ctx.body = {
       code: CODE_OK, msg: '退出成功'
     };
+  },
+
+  async modify(ctx) {
+    const user = await Users.findById(ctx.currentUser.id);
+    console.log(user);
+    ctx.body = '12';
   }
 };

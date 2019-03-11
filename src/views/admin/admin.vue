@@ -14,7 +14,7 @@
           <template slot="title">
             <i class="el-icon-menu"></i>用户信息
           </template>
-          <el-menu-item index="2-1">修改资料</el-menu-item>
+          <el-menu-item index="2-1" @click="go('/admin/modify')">修改资料</el-menu-item>
           <el-menu-item index="2-2">网站信息</el-menu-item>
         </el-submenu>
       </el-menu>
@@ -24,14 +24,14 @@
       <el-header>
         <span>{{$route.name}}</span>
         <el-dropdown style="float: right; cursor: pointer;" trigger="click">
-            <span>
-              你好，{{user.username}}
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
+          <span>
+            你好，{{user.username}}
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
 
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>修改资料</el-dropdown-item>
-            <el-dropdown-item>github</el-dropdown-item>
+            <el-dropdown-item @click.native="goGithub">github</el-dropdown-item>
             <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -59,6 +59,9 @@ export default {
     go(path) {
       this.$router.push(path);
     },
+    goGithub() {
+      window.open('https://github.com/lpeihan/koa-ssr');
+    },
     async logout() {
       await this.logoutAction();
       this.$router.push('/admin/login');
@@ -66,14 +69,16 @@ export default {
   }
 };
 </script>
-<style>
-.el-header {
-  background-color: #b3c0d1;
-  color: #333;
-  line-height: 60px;
-}
+<style lang="stylus">
+.el-header
+  background: url('~@/assets/imgs/login-bg.jpg')
+  opacity: 0.5
+  color: white
+  line-height: 60px
 
-.el-aside {
-  color: #333;
-}
+.el-aside
+  color: #333
+
+.el-dropdown
+  color: white
 </style>

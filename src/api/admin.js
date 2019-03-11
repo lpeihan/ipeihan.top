@@ -27,3 +27,10 @@ export function logout() {
     url: '/users/logout'
   });
 }
+
+export function modify() {
+  return request({
+    method: 'put',
+    url: '/users/modify'
+  });
+}

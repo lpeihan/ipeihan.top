@@ -33,6 +33,14 @@ export default [
         meta: {
           auth: true
         }
+      },
+      {
+        path: '/admin/modify',
+        name: '修改资料',
+        component: require('@/views/admin/modify').default,
+        meta: {
+          auth: true
+        }
       }
     ]
   },
