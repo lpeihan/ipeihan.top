@@ -7,6 +7,8 @@ module.exports = {
   async getAdminArticles(ctx) {
     const articles = await Articles.find({
       author: ctx.currentUser.username
+    }).sort({
+      create_date: -1
     });
 
     ctx.body = {

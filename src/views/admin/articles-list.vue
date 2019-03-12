@@ -14,6 +14,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import dayjs from 'dayjs';
 
 export default {
   computed: {
@@ -22,6 +23,7 @@ export default {
       const list = JSON.parse(JSON.stringify(this.adminArticles));
       return list.map(item => {
         item.tags = item.tags.join();
+        item.create_date = dayjs(item.create_date).format('YY-MM-DD HH:mm:ss');
         return item;
       });
     }

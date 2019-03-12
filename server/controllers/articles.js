@@ -5,21 +5,15 @@ const { CODE_OK } = require('../code');
 
 module.exports = {
   async getArticles(ctx) {
-    const articles = await Articles.find();
+    const articles = await Articles.find({
+      author: 'lipeihan'
+    }).sort({
+      create_date: -1
+    });
 
     ctx.body = {
       code: CODE_OK,
       data: articles
     };
-  },
-
-  async saveArticle(ctx) {
-    const article = new Articles({
-      author: 'lpeihans',
-      title: 'demo',
-      content: 'a demo'
-    });
-
-    ctx.body = await article.save();
   }
 };

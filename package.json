@@ -19,6 +19,7 @@
     "@babel/runtime-corejs2": "^7.2.0",
     "axios": "^0.18.0",
     "bluebird": "^3.5.3",
+    "dayjs": "^1.8.10",
     "element-ui": "^2.6.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",

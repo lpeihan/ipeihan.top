@@ -2,9 +2,7 @@
 
 const router = require('koa-router')();
 const articles = require('../controllers/articles');
-const { authenticate } = require('../services/auth');
 
-router.get('/', authenticate, articles.getArticles);
-router.post('/', articles.saveArticle);
+router.get('/', articles.getArticles);
 
 module.exports = router;

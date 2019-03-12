@@ -17,6 +17,8 @@ const ArticlesSchema = new Schema({
   update_date: String
 });
 
+ArticlesSchema.index({ create_date: 1 });
+
 /**
  * Hooks
  */
