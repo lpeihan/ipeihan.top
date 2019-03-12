@@ -6,18 +6,28 @@ import {
   login,
   register,
   logout,
-  modify
+  modify,
+  getAdminArticles,
+  saveAdminArticle
 } from '@/api/admin';
 
 import {
   SET_ARTICLES,
-  SET_USER
+  SET_USER,
+  SET_ADMIN_ARTICLES
 } from './mutation-types';
 
 const actions = {
   async getArticles({ commit }, payload) {
     const res = await getArticles(payload);
     commit(SET_ARTICLES, res.data);
+  },
+  async getAdminArticlesAction({ commit }, payload) {
+    const res = await getAdminArticles(payload);
+    commit(SET_ADMIN_ARTICLES, res.data);
+  },
+  async saveAdminArticleAction({ commit }, payload) {
+    await saveAdminArticle(payload);
   },
   async loginAction({ commit }, user) {
     const res = await login(user);

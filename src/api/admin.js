@@ -35,3 +35,22 @@ export function modify(data) {
     data
   });
 }
+
+export function getAdminArticles({ start = 0, limit = 10, cookies }) {
+  return request({
+    url: '/admin/articles',
+    params: {
+      start,
+      limit
+    },
+    _cookies: cookies
+  });
+}
+
+export function saveAdminArticle(data) {
+  return request({
+    url: '/admin/articles',
+    method: 'post',
+    data
+  });
+}

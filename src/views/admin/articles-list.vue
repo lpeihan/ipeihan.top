@@ -1,8 +1,8 @@
 <template>
-  <el-table :data="list" style="width: 100%" :row-class-name="tableRowClassName">
+  <el-table :data="adminArticles" style="width: 100%" :row-class-name="tableRowClassName">
     <el-table-column prop="title" label="标题"></el-table-column>
-    <el-table-column prop="date" label="日期"></el-table-column>
-    <el-table-column prop="category" label="分类"></el-table-column>
+    <el-table-column prop="create_date" label="日期"></el-table-column>
+    <el-table-column prop="tags" label="标签"></el-table-column>
     <el-table-column label="管理">
       <template slot-scope="scope">
         <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
@@ -13,29 +13,14 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
-  data() {
-    return {
-      list: [{
-        date: '2016-05-02',
-        category: '王小虎',
-        title: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        category: '王小虎',
-        title: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        category: '王小虎',
-        title: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-03',
-        category: '王小虎',
-        title: '上海市普陀区金沙江路 1518 弄'
-      }]
-    };
+  computed: {
+    ...mapGetters(['adminArticles'])
   },
   methods: {
+    ...mapActions(['getAdminArticlesAction']),
     handleEdit(index, row) {
       console.log(index, row);
     },
@@ -50,6 +35,12 @@ export default {
       }
       return '';
     }
+  },
+  asyncData ({ store, cookies }) {
+    return store.dispatch('getAdminArticlesAction', { cookies });
+  },
+  mounted() {
+    this.getAdminArticlesAction({});
   }
 };
 </script>

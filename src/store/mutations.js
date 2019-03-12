@@ -1,6 +1,7 @@
 import {
   SET_ARTICLES,
-  SET_USER
+  SET_USER,
+  SET_ADMIN_ARTICLES
 } from './mutation-types';
 
 const mutations = {
@@ -9,6 +10,9 @@ const mutations = {
   },
   [SET_USER](state, user) {
     state.user = user;
+  },
+  [SET_ADMIN_ARTICLES](state, articles) {
+    state.adminArticles = articles;
   }
 };
 

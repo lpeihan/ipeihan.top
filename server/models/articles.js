@@ -12,6 +12,7 @@ const ArticlesSchema = new Schema({
   author: { type: String, required: true },
   title: { type: String },
   content: { type: String },
+  tags: { type: Array, default: [] },
   create_date: { type: Number, default: Date.now() },
   update_date: String
 });
@@ -35,6 +36,7 @@ ArticlesSchema
       'id',
       'author',
       'title',
+      'tags',
       'content',
       'create_date',
       'update_date'

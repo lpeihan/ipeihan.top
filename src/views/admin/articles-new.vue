@@ -19,7 +19,7 @@
       <div class="right-btn">
         <el-button>取消</el-button>
          <el-button>预览</el-button>
-        <el-button type="primary">保存</el-button>
+        <el-button type="primary" @click="save">保存</el-button>
       </div>
     </div>
   </div>
@@ -27,6 +27,7 @@
 
 <script>
 import Types from './types';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
@@ -41,6 +42,15 @@ export default {
       },
       select: '1'
     };
+  },
+  methods: {
+    ...mapActions(['saveAdminArticleAction']),
+    async save() {
+      await this.saveAdminArticleAction(this.model);
+
+      this.$message({ type: 'success', message: '发布文章成功' });
+      this.$router.push('/admin/articles-list');
+    }
   }
 };
 </script>
