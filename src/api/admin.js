@@ -54,3 +54,18 @@ export function saveAdminArticle(data) {
     data
   });
 }
+
+export function updateAdminArticle(data) {
+  return request({
+    url: '/admin/articles',
+    method: 'put',
+    data
+  });
+}
+
+export function deleteAdminArticle(id) {
+  return request({
+    url: `/admin/articles/${id}`,
+    method: 'delete'
+  });
+}

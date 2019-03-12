@@ -1,7 +1,8 @@
 const state = () => ({
   articles: [],
   user: {},
-  adminArticles: []
+  adminArticles: [],
+  currentArticle: {}
 });
 
 export default state;

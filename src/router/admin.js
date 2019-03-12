@@ -27,6 +27,14 @@ export default [
         }
       },
       {
+        path: '/admin/articles-edit',
+        name: '编辑文章',
+        component: require('@/views/admin/articles-edit').default,
+        meta: {
+          auth: true
+        }
+      },
+      {
         path: '/admin/articles-type',
         name: '添加分类',
         component: require('@/views/admin/articles-type').default,

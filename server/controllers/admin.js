@@ -25,5 +25,34 @@ module.exports = {
       code: CODE_OK,
       msg: '发布文章成功'
     };
+  },
+
+  async updateAdminArticle(ctx) {
+    const body = ctx.request.body;
+    const article = await Articles.findById(body._id);
+
+    Object.assign(article, {
+      title: body.title,
+      content: body.content,
+      tags: body.tags
+    });
+
+    await article.save();
+
+    ctx.body = {
+      code: CODE_OK,
+      msg: '修改文章成功'
+    };
+  },
+
+  async deleteAdminArticle(ctx) {
+    const id = ctx.params.id;
+
+    await Articles.findByIdAndRemove(id);
+
+    ctx.body = {
+      code: CODE_OK,
+      msg: '删除文章成功'
+    };
   }
 };

@@ -8,13 +8,16 @@ import {
   logout,
   modify,
   getAdminArticles,
-  saveAdminArticle
+  saveAdminArticle,
+  updateAdminArticle,
+  deleteAdminArticle
 } from '@/api/admin';
 
 import {
   SET_ARTICLES,
   SET_USER,
-  SET_ADMIN_ARTICLES
+  SET_ADMIN_ARTICLES,
+  SET_CURRENT_ARTICLE
 } from './mutation-types';
 
 const actions = {
@@ -52,6 +55,18 @@ const actions = {
   async modifyAction({ commit }, payload) {
     const res = await modify(payload);
     commit(SET_USER, res.data);
+  },
+
+  setCurrentArticle({ commit }, article) {
+    commit(SET_CURRENT_ARTICLE, article);
+  },
+
+  async updateAdminArticleAction({ commit }, article) {
+    await updateAdminArticle(article);
+  },
+
+  async deleteAdminArticleAction({ commit }, id) {
+    await deleteAdminArticle(id);
   }
 };
 

@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="adminArticles" style="width: 100%" :row-class-name="tableRowClassName">
+  <el-table :data="list" style="width: 100%" :row-class-name="tableRowClassName">
     <el-table-column prop="title" label="标题"></el-table-column>
     <el-table-column prop="create_date" label="日期"></el-table-column>
     <el-table-column prop="tags" label="标签"></el-table-column>
@@ -17,15 +17,29 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['adminArticles'])
+    ...mapGetters(['adminArticles']),
+    list() {
+      const list = JSON.parse(JSON.stringify(this.adminArticles));
+      return list.map(item => {
+        item.tags = item.tags.join();
+        return item;
+      });
+    }
   },
   methods: {
-    ...mapActions(['getAdminArticlesAction']),
+    ...mapActions(['getAdminArticlesAction', 'setCurrentArticle', 'deleteAdminArticleAction']),
     handleEdit(index, row) {
-      console.log(index, row);
+      this.setCurrentArticle(this.adminArticles[index]);
+      this.$router.push('/admin/articles-edit');
     },
-    handleDelete(index, row) {
-      console.log(index, row);
+    async handleDelete(index, row) {
+      await this.deleteAdminArticleAction(row._id);
+      this.$message({
+        type: 'success',
+        message: '删除文章成功'
+      });
+
+      this.getAdminArticlesAction({});
     },
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex === 1) {
