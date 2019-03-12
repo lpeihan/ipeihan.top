@@ -14,7 +14,7 @@
     <el-input type="textarea" class="textarea" placeholder="请输入内容" v-model="model.content"></el-input>
 
     <div class="bottom-btns">
-      <types :tags="tags" addName="new tag"></types>
+      <types :tags="model.tags" addName="new tag"></types>
 
       <div class="right-btn">
         <el-button>取消</el-button>
@@ -36,7 +36,8 @@ export default {
     return {
       model: {
         title: '',
-        content: ''
+        content: '',
+        tags: []
       },
       select: '1'
     };
@@ -51,7 +52,7 @@ export default {
   >>>.types
     margin: 10px 0
   .textarea
-    height: calc(100% - 120px)
+    height: calc(100% - 150px)
     margin-top: 20px
 
     >>>.el-textarea__inner
