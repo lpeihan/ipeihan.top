@@ -17,21 +17,29 @@
       <types :tags="model.tags" addName="new tag"></types>
 
       <div class="right-btn">
-        <el-button>取消</el-button>
-         <el-button>预览</el-button>
+        <el-button @click="$router.push('/admin/articles-list')">取消</el-button>
+        <el-button @click="preview">预览</el-button>
         <el-button type="primary" @click="save">保存</el-button>
       </div>
     </div>
+    <modal ref="modal">
+      <div class="markdown-body">
+        <div class="preview" v-html="html"></div>
+      </div>
+    </modal>
   </div>
 </template>
 
 <script>
 import Types from './types';
 import { mapActions } from 'vuex';
+import Modal from '@/components/modal/modal';
+import marked from '@/utils/marked';
 
 export default {
   components: {
-    Types
+    Types,
+    Modal
   },
   data() {
     return {
@@ -40,7 +48,8 @@ export default {
         content: '',
         tags: []
       },
-      select: '1'
+      select: '1',
+      html: ''
     };
   },
   methods: {
@@ -50,6 +59,10 @@ export default {
 
       this.$message({ type: 'success', message: '发布文章成功' });
       this.$router.push('/admin/articles-list');
+    },
+    preview() {
+      this.html = marked(this.model.content);
+      this.$refs.modal.open();
     }
   }
 };
@@ -76,4 +89,11 @@ export default {
     display: flex
     align-items: center
     justify-content: space-between
+
+  .markdown-body
+    box-sizing: border-box
+    max-width: 980px
+
+    .preview
+      padding: 1% 8%
 </style>
