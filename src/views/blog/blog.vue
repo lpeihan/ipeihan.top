@@ -4,7 +4,7 @@
 
     <div class="blog-content">
       <transition mode="out-in">
-        <router-view :articles="articles"></router-view>
+        <router-view class="router-view" :articles="articles"></router-view>
       </transition>
     </div>
   </div>
@@ -37,24 +37,25 @@ export default {
 
 <style lang="stylus" scoped>
 .blog
+  .router-view
+    &.v
+      &-enter-active
+      &-leave-active
+        transition: all 0.3s
+
+      &-enter
+      &-leave-to
+        opacity: 0
+
   &-content
     margin-left: 300px
+    min-height: 100vh
     padding: 24px
     background: #eee
-
-  .fade
-    &-enter
-    &-leave-to
-      opacity: 0
-
-    &-enter-active
-    &-leave-active
-      transition: opacity 0.5s
 
   @media screen and (max-width: 800px)
     .blog
       &-content
         margin: 0
         padding: 0
-
 </style>

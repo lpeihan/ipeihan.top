@@ -3,6 +3,7 @@ import marked from '@/utils/marked';
 const getters = {
   articles: state => {
     return state.articles.map(item => {
+      item.summary = marked(item.content.slice(0, 400));
       item.html = marked(item.content);
       return item;
     });

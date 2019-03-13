@@ -16,6 +16,9 @@ files.keys().forEach((key) => {
 export default function() {
   const router = new Router({
     mode: 'history',
+    scrollBehavior (to, from, pos) {
+      return pos || { x: 0, y: 0 };
+    },
     routes: [
       {
         path: '/',
@@ -25,6 +28,16 @@ export default function() {
             path: '/',
             component: require('@/views/blog/articles').default,
             name: '博客首页'
+          },
+          {
+            path: '/articles/details/:index',
+            component: require('@/views/blog/articles-details').default,
+            name: '文章内容'
+          },
+          {
+            path: '/tags',
+            component: require('@/views/blog/tags').default,
+            name: '标签'
           }
         ]
       }
