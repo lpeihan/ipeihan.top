@@ -19,8 +19,14 @@ export default function() {
     routes: [
       {
         path: '/',
-        name: 'blog',
-        component: require('@/views/blog/blog').default
+        component: require('@/views/blog/blog').default,
+        children: [
+          {
+            path: '/',
+            component: require('@/views/blog/articles').default,
+            name: '博客首页'
+          }
+        ]
       }
     ].concat(routes)
   });
