@@ -1,15 +1,24 @@
 <template>
-  <el-table :data="list" style="width: 100%" :row-class-name="tableRowClassName">
-    <el-table-column prop="title" label="标题"></el-table-column>
-    <el-table-column prop="create_date" label="日期"></el-table-column>
-    <el-table-column prop="tags" label="标签"></el-table-column>
-    <el-table-column label="管理">
-      <template slot-scope="scope">
-        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <div class="articles-list">
+    <el-table :data="list" style="width: 100%" :row-class-name="tableRowClassName">
+      <el-table-column prop="title" label="标题"></el-table-column>
+      <el-table-column prop="create_date" label="日期"></el-table-column>
+      <el-table-column prop="tags" label="标签"></el-table-column>
+      <el-table-column label="管理">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :page-size="10"
+      :total="adminArticlesTotal"
+      @current-change="handleCurrentChange"
+    ></el-pagination>
+  </div>
 </template>
 
 <script>
@@ -18,7 +27,7 @@ import dayjs from 'dayjs';
 
 export default {
   computed: {
-    ...mapGetters(['adminArticles']),
+    ...mapGetters(['adminArticles', 'adminArticlesTotal']),
     list() {
       const list = JSON.parse(JSON.stringify(this.adminArticles));
       return list.map(item => {
@@ -50,9 +59,15 @@ export default {
         return 'success-row';
       }
       return '';
+    },
+    handleCurrentChange(val) {
+      this.getAdminArticlesAction({
+        start: 10 * (val - 1),
+        limit: 10
+      });
     }
   },
-  asyncData ({ store, cookies }) {
+  asyncData({ store, cookies }) {
     return store.dispatch('getAdminArticlesAction', { cookies });
   },
   mounted() {
@@ -67,4 +82,8 @@ export default {
 
 .el-table .success-row
   background: #f0f9eb
+
+.el-pagination
+  text-align: center
+  margin-top: 20px
 </style>

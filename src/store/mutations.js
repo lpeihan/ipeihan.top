@@ -2,7 +2,9 @@ import {
   SET_ARTICLES,
   SET_USER,
   SET_ADMIN_ARTICLES,
-  SET_CURRENT_ARTICLE
+  SET_CURRENT_ARTICLE,
+  SET_ADMIN_ARTICLES_TOTAL,
+  SET_ARTICLES_TOTAL
 } from './mutation-types';
 
 const mutations = {
@@ -17,6 +19,12 @@ const mutations = {
   },
   [SET_CURRENT_ARTICLE](state, article) {
     state.currentArticle = article;
+  },
+  [SET_ADMIN_ARTICLES_TOTAL](state, total) {
+    state.adminArticlesTotal = total;
+  },
+  [SET_ARTICLES_TOTAL](state, total) {
+    state.articlesTotal = total;
   }
 };
 

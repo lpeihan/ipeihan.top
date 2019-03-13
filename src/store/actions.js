@@ -17,17 +17,21 @@ import {
   SET_ARTICLES,
   SET_USER,
   SET_ADMIN_ARTICLES,
-  SET_CURRENT_ARTICLE
+  SET_CURRENT_ARTICLE,
+  SET_ADMIN_ARTICLES_TOTAL,
+  SET_ARTICLES_TOTAL
 } from './mutation-types';
 
 const actions = {
   async getArticles({ commit }, payload) {
     const res = await getArticles(payload);
-    commit(SET_ARTICLES, res.data);
+    commit(SET_ARTICLES, res.data.articles);
+    commit(SET_ARTICLES_TOTAL, res.data.total);
   },
   async getAdminArticlesAction({ commit }, payload) {
     const res = await getAdminArticles(payload);
-    commit(SET_ADMIN_ARTICLES, res.data);
+    commit(SET_ADMIN_ARTICLES, res.data.articles);
+    commit(SET_ADMIN_ARTICLES_TOTAL, res.data.total);
   },
   async saveAdminArticleAction({ commit }, payload) {
     await saveAdminArticle(payload);

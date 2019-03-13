@@ -2,7 +2,9 @@ const state = () => ({
   articles: [],
   user: {},
   adminArticles: [],
-  currentArticle: {}
+  currentArticle: {},
+  adminArticlesTotal: 0,
+  articlesTotal: 0
 });
 
 export default state;

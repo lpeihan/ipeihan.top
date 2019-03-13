@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Message } from 'element-ui';
 import bus from '@/utils/bus';
-
 import { isServer } from '@/config';
 
 const CODE_OK = 0;
@@ -10,7 +9,7 @@ const request = axios.create({
   baseURL: isServer ? 'http://127.0.0.1:8201/api/' : '/api',
   timeout: 5000,
   params: {},
-  _loading: false, // 是否显示 loading
+  _loading: true, // 是否显示 loading
   _toast: true // 报错后是否显示 toast
 });
 

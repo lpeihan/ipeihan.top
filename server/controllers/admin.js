@@ -5,15 +5,24 @@ const { CODE_OK } = require('../code');
 
 module.exports = {
   async getAdminArticles(ctx) {
+    const query = ctx.request.query;
     const articles = await Articles.find({
       author: ctx.currentUser.username
-    }).sort({
-      create_date: -1
-    });
+    })
+      .sort({ create_date: -1 })
+      .skip(Number(query.start))
+      .limit(Number(query.limit));
+
+    const total = (await Articles.find({
+      author: ctx.currentUser.username
+    })).length;
 
     ctx.body = {
       code: CODE_OK,
-      data: articles
+      data: {
+        articles,
+        total
+      }
     };
   },
 

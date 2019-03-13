@@ -3,7 +3,9 @@ const getters = {
   user: state => state.user,
   auth: state => Boolean(Object.keys(state.user).length),
   adminArticles: state => state.adminArticles,
-  currentArticle: state => state.currentArticle
+  currentArticle: state => state.currentArticle,
+  adminArticlesTotal: state => state.adminArticlesTotal,
+  articlesTotal: state => state.articlesTotal
 };
 
 export default getters;
