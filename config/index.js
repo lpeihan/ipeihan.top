@@ -1,7 +1,7 @@
 const app = require('../package.json');
 
 module.exports = {
-  port: 8201,
+  port: 2001,
 
   mongo: {
     host: 'localhost',
