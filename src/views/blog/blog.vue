@@ -15,6 +15,9 @@ import Sidebar from './sidebar';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
+  metaInfo: {
+    title: 'Lpeihan\'s 博客'
+  },
   components: {
     Sidebar
   },

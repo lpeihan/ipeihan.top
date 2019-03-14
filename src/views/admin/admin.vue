@@ -50,6 +50,9 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
+  metaInfo: {
+    title: '博客管理员'
+  },
   data() {
     return {};
   },

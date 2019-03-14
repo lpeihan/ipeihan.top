@@ -38,6 +38,7 @@ export default context => {
       })).then(data => {
         context.state = store.state;
         context.router = router;
+        context.meta = app.$meta();
         resolve(app);
       }).catch(reject);
     }, reject);

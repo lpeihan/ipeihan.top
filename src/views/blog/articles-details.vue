@@ -10,6 +10,11 @@
 import ArticlesHeader from './articles-header';
 import ArticlesFooter from './articles-footer';
 export default {
+  metaInfo() {
+    return {
+      title: this.articles[this.index].title
+    };
+  },
   props: {
     articles: Array
   },

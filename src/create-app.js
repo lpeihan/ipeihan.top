@@ -8,11 +8,13 @@ import '@/assets/styles/index.styl';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import filters from '@/utils/filters';
+import Meta from 'vue-meta';
 
 Vue.config.productionTip = false;
 Vue.use(Icon);
 Vue.use(ElementUI);
 Vue.use(filters);
+Vue.use(Meta);
 
 export default () => {
   const router = createRouter();
