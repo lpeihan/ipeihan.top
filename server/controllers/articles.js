@@ -14,7 +14,7 @@ module.exports = {
       .limit(Number(query.limit));
 
     const total = (await Articles.find({
-      author: ctx.currentUser.username
+      author: 'lipeihan'
     })).length;
 
     ctx.body = {
