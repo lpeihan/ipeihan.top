@@ -1,9 +1,20 @@
 const Router = require('koa-router');
 const fs = require('fs');
 const path = require('path');
+const LRU = require('lru-cache');
 const { createBundleRenderer } = require('vue-server-renderer');
 
 const { isProd } = require('../utils');
+
+function createRenderer(bundle, options) {
+  return createBundleRenderer(bundle, Object.assign(options), {
+    cache: new LRU({
+      max: 1000,
+      maxAge: 1000 * 60 * 15
+    }),
+    runInNewContext: false
+  });
+}
 
 module.exports = async (app) => {
   const router = new Router();
@@ -17,15 +28,13 @@ module.exports = async (app) => {
     const bundle = require('../../dist/vue-ssr-server-bundle.json');
     const clientManifest = require('../../dist/vue-ssr-client-manifest.json');
 
-    renderer = createBundleRenderer(bundle, {
-      runInNewContext: false,
+    renderer = createRenderer(bundle, {
       template,
       clientManifest
     });
   } else {
     readyPromise = require('../../build/setup-dev-server')(app, (bundle, clientManifest) => {
-      renderer = createBundleRenderer(bundle, {
-        runInNewContext: false,
+      renderer = createRenderer(bundle, {
         template,
         clientManifest
       });
