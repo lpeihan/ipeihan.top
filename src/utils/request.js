@@ -6,7 +6,7 @@ import { isServer } from '@/config';
 const CODE_OK = 0;
 
 const request = axios.create({
-  baseURL: isServer ? 'http://127.0.0.1:8201/api/' : '/api',
+  baseURL: isServer ? 'http://127.0.0.1:2001/api/' : '/api',
   timeout: 5000,
   params: {},
   _loading: true, // 是否显示 loading
