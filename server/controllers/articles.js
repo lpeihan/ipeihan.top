@@ -7,14 +7,14 @@ module.exports = {
   async getArticles(ctx) {
     const query = ctx.request.query;
     const articles = await Articles.find({
-      author: 'lipeihan'
+      author: 'lpeihan'
     })
       .sort({ create_date: -1 })
       .skip(Number(query.start))
       .limit(Number(query.limit));
 
     const total = (await Articles.find({
-      author: 'lipeihan'
+      author: 'lpeihan'
     })).length;
 
     ctx.body = {
