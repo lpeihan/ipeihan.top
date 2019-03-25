@@ -1,15 +1,26 @@
-## Usage
+> 使用Koa、Vue、Vuex、Vue-server-renderer、PWA、Webpack4、MongDB构建的博客
+
+## 用法
 
 ```bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 开发环境
 npm run dev
 
-# build for production with minification
+# 打包
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# 生产环境
+npm run start
 ```
+
+## todo list
+
+- ~~从零搭建`ssr`环境~~
+- ~~博客管理员后台~~
+- ~~权限管理~~
+- ~~博客文章展示~~
+- ~~引入`pwa`~~
+- 引入`jest`测试
