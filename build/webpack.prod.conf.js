@@ -7,6 +7,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
 const VueClientPlugin = require('vue-server-renderer/client-plugin');
+const SWPrecachePlugin = require('sw-precache-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webpackBaseConf = require('./webpack.base.conf');
 const packageJson = require('../package.json');
@@ -56,7 +58,17 @@ const webpackProdConf = merge(webpackBaseConf, {
         map: false
       },
       canPrint: true
-    })
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: resolve('public/manifest.json'),
+        to: ''
+      },
+      {
+        from: resolve('public/icons'),
+        to: 'icons'
+      }
+    ])
   ],
 
   optimization: {
@@ -108,6 +120,29 @@ if (process.env.npm_config_argv.includes('--report')) {
   const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
     .BundleAnalyzerPlugin;
   webpackProdConf.plugins.push(new BundleAnalyzerPlugin());
+}
+
+if (process.env.NODE_ENV === 'production') {
+  webpackProdConf.plugins.push(
+    // auto generate service worker
+    new SWPrecachePlugin({
+      cacheId: 'koa-ssr-blog',
+      filename: 'service-worker.js',
+      minify: true,
+      dontCacheBustUrlsMatching: /./,
+      staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
+      runtimeCaching: [
+        {
+          urlPattern: '/',
+          handler: 'networkFirst'
+        },
+        {
+          urlPattern: /\/(png|jpg|jpeg)/,
+          handler: 'networkFirst'
+        }
+      ]
+    })
+  );
 }
 
 module.exports = webpackProdConf;

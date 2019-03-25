@@ -25,3 +25,8 @@ bus.$on('auth', () => {
 router.onReady(() => {
   app.$mount('#app');
 });
+
+// service worker
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/service-worker.js');
+}
