@@ -1,5 +1,3 @@
-> 使用Koa、Vue、Vuex、Vue-server-renderer、PWA、Webpack4、MongDB构建的博客
-
 ## 用法
 
 ```bash
