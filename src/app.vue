@@ -7,6 +7,8 @@
 </template>
 
 <script>
+import { Message } from 'element-ui';
+
 export default {
   data() {
     return {
@@ -20,6 +22,15 @@ export default {
       this.transitionName =
         toDepth < fromDepth ? 'slider-right' : 'slider-left';
     }
+  },
+  mounted() {
+    window.addEventListener('offline', function () {
+      Message.info('网络异常，请检查您的网络');
+    }, false);
+
+    window.addEventListener('online', function () {
+      Message.success('网络已恢复正常，请刷新拉取最新代码');
+    }, false);
   }
 };
 </script>
